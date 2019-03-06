@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -31,6 +33,29 @@ app.use('/login', loginRouter);
 app.use('/profile', profileRouter);
 app.use('/register', registerRouter);
 app.use('/reset', resetRouter);
+
+
+const MongoClient = require('mongodb').MongoClient;
+const assert = require('assert');
+
+// Connection URL
+const url = process.env.MONGO_DB_URL;
+
+// Database Name
+const dbName = 'myproject';
+
+// Create a new MongoClient
+const client = new MongoClient(url);
+
+// Use connect method to connect to the Server
+client.connect(function(err) {
+  assert.equal(null, err);
+  console.log("Connected successfully to server");
+
+  const db = client.db(dbName);
+
+  client.close();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
