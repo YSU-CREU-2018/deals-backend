@@ -34,6 +34,17 @@ app.use('/profile', profileRouter);
 app.use('/register', registerRouter);
 app.use('/reset', resetRouter);
 
+const findDocuments = function(db, callback) {
+  // Get the documents collection
+  const collection = db.collection('recommender-site');
+  // Find some documents
+  collection.find({}).toArray(function(err, docs) {
+    assert.equal(err, null);
+    console.log("Found the following records");
+    console.log(docs)
+    callback(docs);
+  });
+}
 
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
@@ -42,7 +53,7 @@ const assert = require('assert');
 const url = process.env.MONGO_DB_URL;
 
 // Database Name
-const dbName = 'myproject';
+const dbName = 'deals-data';
 
 // Create a new MongoClient
 const client = new MongoClient(url);
@@ -54,7 +65,9 @@ client.connect(function(err) {
 
   const db = client.db(dbName);
 
-  client.close();
+  findDocuments(db, function() {
+      client.close();
+    });
 });
 
 // catch 404 and forward to error handler
