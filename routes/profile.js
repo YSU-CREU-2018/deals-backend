@@ -11,7 +11,7 @@ const dbName = 'deals-data';
 const client = new MongoClient(url);
 
 /* GET profile listing. */
-router.get('/:user_id', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
 
     var response = '';
 
@@ -24,9 +24,9 @@ router.get('/:user_id', function(req, res, next) {
       // Get the documents collection
       const collection = db.collection('user-stuff');
       // Find some documents
-      collection.find({}).toArray(function(err, docs) {
+      collection.find({'id' : req.params.id}).toArray(function(err, docs) {
         console.log("Found the following records");
-        console.log(docs)
+        console.log(docs);
         response = docs;
         res.send(response);
       });
