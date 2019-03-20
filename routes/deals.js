@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var cors = require('cors')
+
+router.use(cors())
 
 /* GET deals listing. */
 const MongoClient = require('mongodb').MongoClient;

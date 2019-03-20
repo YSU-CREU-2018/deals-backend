@@ -1,5 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var cors = require('cors')
+
+router.use(cors())
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -26,9 +29,9 @@ router.post('/', function(req, res, next) {
         collection.insertOne(req.body);
 
         if(err)
-            return res.sendStatus(403);
+            return res.send('403');
         else{
-            return res.sendStatus(200);
+            return res.send('200');
         }
     });
 });
