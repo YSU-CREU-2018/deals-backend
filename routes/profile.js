@@ -17,7 +17,6 @@ router.get('/:id', function(req, res, next) {
 
     // Use connect method to connect to the Server
     client.connect(function(err) {
-      console.log("Connected successfully to server");
 
       const db = client.db(dbName);
 
@@ -25,8 +24,6 @@ router.get('/:id', function(req, res, next) {
       const collection = db.collection('user-stuff');
       // Find some documents
       collection.find({'id' : req.params.id}).toArray(function(err, docs) {
-        console.log("Found the following records");
-        console.log(docs);
         response = docs;
         res.send(response);
       });

@@ -12,10 +12,11 @@ const client = new MongoClient(url);
 
 /* GET register listing. */
 router.post('/', function(req, res, next) {
-    console.log(req.body)
+
+    req.body.rated = {};
+
     // Use connect method to connect to the Server
     client.connect(function(err) {
-        console.log("Connected successfully to server");
 
         const db = client.db(dbName);
 
@@ -23,7 +24,7 @@ router.post('/', function(req, res, next) {
         const collection = db.collection('user-stuff');
         // Find some documents
         collection.insertOne(req.body);
-        
+
         if(err)
             return res.sendStatus(403);
         else{

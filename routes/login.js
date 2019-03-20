@@ -12,10 +12,8 @@ const client = new MongoClient(url);
 
 /* GET login listing. */
 router.post('/', function(req, res, next) {
-    console.log(req.body)
     // Use connect method to connect to the Server
     client.connect(function(err) {
-      console.log("Connected successfully to server");
 
         const db = client.db(dbName);
 
@@ -27,10 +25,8 @@ router.post('/', function(req, res, next) {
                 return res.sendStatus(403);
             else
                 collection.find({'email' : req.body.email}).toArray(function(err, docs) {
-                  console.log("Found the following records");
-                  console.log(docs);
-                  response = docs;
-                  res.send(response);
+                    response = docs;
+                    res.send(response);
                 });
         });
     });
