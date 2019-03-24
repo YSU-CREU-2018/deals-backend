@@ -15,22 +15,27 @@ const dbName = 'deals-data';
 const client = new MongoClient(url);
 
 /* GET profile listing. */
-router.get('/:id', function(req, res, next) {
+router.post('/', function(req, res, next) {
 
     var response = '';
 
     // Use connect method to connect to the Server
     client.connect(function(err) {
 
-      const db = client.db(dbName);
+        const db = client.db(dbName);
 
-      // Get the documents collection
-      const collection = db.collection('user-stuff');
-      // Find some documents
-      collection.find({'id' : req.params.id}).toArray(function(err, docs) {
-        response = docs;
-        res.send(response);
-      });
+        // Get the documents collection
+        const collection = db.collection('user-stuff');
+        // Find some documents
+        collection.findOne( {"email": req.body["email"]}, function(err, results) {
+            if(err || !results)
+                return res.sendStatus(403);
+            else
+                collection.find({'email' : req.body.email}).toArray(function(err, docs) {
+                    response = docs;
+                    res.send(response);
+                });
+        });
     });
 });
 

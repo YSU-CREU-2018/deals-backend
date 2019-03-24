@@ -16,7 +16,8 @@ const client = new MongoClient(url);
 /* GET register listing. */
 router.post('/', function(req, res, next) {
 
-    req.body.rated = {};
+    req.body.rated = [];
+    req.body.rated.ratedDeal = {};
 
     // Use connect method to connect to the Server
     client.connect(function(err) {

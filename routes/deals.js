@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
       // Get the documents collection
       const collection = db.collection('recommender-site');
       // Find some documents
-      collection.aggregate([{ $sample: { size: 2 } }]).toArray(function(err, docs) {
+      collection.aggregate([{ $sample: { size: 50} }]).toArray(function(err, docs) {
         response = docs;
         res.send(response);
       });
@@ -49,7 +49,7 @@ router.post('/:deal_id', function(req, res, next) {
         const query = { "email" : req.body.email };
         const update = {
             "$addToSet": {
-                "rated": {
+                "ratedDeal": {
                     "deal": req.body["deal"],
                     "rating" : req.body.rating
                 }
