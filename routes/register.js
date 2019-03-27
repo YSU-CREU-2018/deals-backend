@@ -15,6 +15,9 @@ const client = new MongoClient(url);
 
 /* GET register listing. */
 router.post('/', function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", 'http://www.dealbunny.dev/register/');
+    res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
 
     req.body.rated = [];
     req.body.rated.ratedDeal = {};

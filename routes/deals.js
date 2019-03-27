@@ -17,6 +17,10 @@ const client = new MongoClient(url);
 /* GET profile listing. */
 router.get('/', function(req, res, next) {
 
+    res.setHeader("Access-Control-Allow-Origin", 'http://www.dealbunny.dev/deals/');
+    res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
+
     var response = '';
 
     // Use connect method to connect to the Server
@@ -38,6 +42,10 @@ router.get('/', function(req, res, next) {
 // });
 
 router.post('/:deal_id', function(req, res, next) {
+    res.setHeader("Access-Control-Allow-Origin", 'http://www.dealbunny.dev/deals/:deal_id');
+    res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
+
     var response = '';
     // Use connect method to connect to the Server
     client.connect(function(err) {
