@@ -17,13 +17,7 @@ var registerRouter = require('./routes/register');
 var app = express();
 app.use(cors());
 
-app.options('/login', function (req, res) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader('Access-Control-Allow-Methods', '*');
-  res.setHeader("Access-Control-Allow-Headers", "*");
-  res.end();
-});
-
+app.use(cors({'preflightContinue': false,}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
