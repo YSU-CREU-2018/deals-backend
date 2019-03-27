@@ -15,7 +15,7 @@ var profileRouter = require('./routes/profile');
 var registerRouter = require('./routes/register');
 
 var app = express();
-app.use(cors())
+app.use(cors());
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
