@@ -15,9 +15,7 @@ const client = new MongoClient(url);
 
 /* GET login listing. */
 router.post('/', function(req, res, next) {
-    res.setHeader("Access-Control-Allow-Origin", 'http://www.dealbunny.dev/login/');
-    res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS,PUT,DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Accept');
+    var response = '';
     // Use connect method to connect to the Server
     client.connect(function(err) {
 
