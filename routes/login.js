@@ -1,8 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var cors = require('cors')
-
-router.use(cors())
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -11,13 +8,15 @@ const url = process.env.MONGO_DB_URL;
 // Database Name
 const dbName = 'deals-data';
 // Create a new MongoClient
-const client = new MongoClient(url);
+const client = new MongoClient(url, { useNewUrlParser: true });
 
 /* GET login listing. */
 router.post('/', function(req, res, next) {
     var response = '';
     // Use connect method to connect to the Server
     client.connect(function(err) {
+
+        console.log(err);
 
         const db = client.db(dbName);
 
@@ -30,6 +29,7 @@ router.post('/', function(req, res, next) {
             else
                 collection.find({'email' : req.body.email}).toArray(function(err, docs) {
                     response = docs;
+                    console.log(res);
                     res.send(response);
                 });
         });
