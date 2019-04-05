@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Db = require('mongodb').Db;
+// var Db = require('mongodb').Db;
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -16,7 +16,7 @@ router.post('/', function(req, res, next) {
     var response = '';
 
     // Use connect method to connect to the Server
-    client.connect(function(err, db) {
+    client.connect(function(err) {
 
         const db = client.db(dbName);
 
@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
                     res.send(response);
                 });
         });
-        db.close();
+        // db.close();
     });
 });
 
