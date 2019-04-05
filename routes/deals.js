@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
     var response = '';
 
     // Use connect method to connect to the Server
-    client.open(function(err, client) {
+    client.connect(function(err) {
 
       const db = client.db(dbName);
       // Get the documents collection
