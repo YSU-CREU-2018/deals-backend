@@ -29,8 +29,8 @@ router.get('/', function(req, res, next) {
         response = docs;
         res.send(response);
       });
-      db.close();
     });
+    db.close();
 
 });
 //will not need we cut this out but i am keeping it for safekeeping
@@ -64,8 +64,8 @@ router.post('/:deal_id', function(req, res, next) {
                 return res.sendStatus(200);
             }
         });
-        db.close();
     });
+    db.close();
 });
 
 module.exports = router;
