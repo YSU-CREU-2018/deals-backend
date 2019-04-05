@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+// var Db = require('mongodb').Db;
 /* GET deals listing. */
 const MongoClient = require('mongodb').MongoClient;
 
@@ -13,11 +13,10 @@ const client = new MongoClient(url);
 
 /* GET profile listing. */
 router.get('/', function(req, res, next) {
-    var Db = require('mongodb').Db;
     var response = '';
 
     // Use connect method to connect to the Server
-    client.connect(function(err, Db) {
+    client.connect(function(err) {
 
       const db = client.db(dbName);
       // Get the documents collection
@@ -27,8 +26,8 @@ router.get('/', function(req, res, next) {
         response = docs;
         res.send(response);
       });
+      db.close();
     });
-    Db.close();
 });
 //will not need we cut this out but i am keeping it for safekeeping
 // router.get('/rated/:user_id', function(req, res, next) {
@@ -36,7 +35,7 @@ router.get('/', function(req, res, next) {
 // });
 
 router.post('/:deal_id', function(req, res, next) {
-    var Db = require('mongodb').Db;
+
     var response = '';
     // Use connect method to connect to the Server
     client.connect(function(err, Db) {
