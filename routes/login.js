@@ -33,8 +33,8 @@ router.post('/', function(req, res, next) {
                     console.log(res);
                     res.send(response);
                 });
-            db.close();
         });
+        db.close();
     });
 });
 module.exports = router;
