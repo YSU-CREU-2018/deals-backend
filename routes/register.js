@@ -32,8 +32,8 @@ router.post('/', function(req, res, next) {
         else{
             return res.send('200');
         }
-        db.close();
     });
+    db.close();
 });
 
 module.exports = router;

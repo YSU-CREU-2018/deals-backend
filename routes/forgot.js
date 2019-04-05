@@ -35,8 +35,8 @@ router.post('/', function(req, res, next) {
                 collection.updateOne(query, update);
                 return res.sendStatus(200);
             }
-            db.close();
         });
+        db.close();
     });
 });
 
