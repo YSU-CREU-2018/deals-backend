@@ -35,8 +35,8 @@ router.post('/', function(req, res, next) {
                     res.send(response);
                 });
             }
+            // db.close();
         });
-        db.close();
     });
 });
 module.exports = router;
