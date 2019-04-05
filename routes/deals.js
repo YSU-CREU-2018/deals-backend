@@ -19,7 +19,7 @@ router.get('/', function(req, res, next) {
     var response = '';
 
     // Use connect method to connect to the Server
-    client.connect(function(err, db) {
+    client.connect(function(err, Db) {
 
       const db = client.db(dbName);
       // Get the documents collection
@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
         res.send(response);
       });
     });
-    db.close();
+    Db.close();
 
 });
 //will not need we cut this out but i am keeping it for safekeeping
@@ -42,7 +42,7 @@ router.post('/:deal_id', function(req, res, next) {
 
     var response = '';
     // Use connect method to connect to the Server
-    client.connect(function(err, db) {
+    client.connect(function(err, Db) {
 
         const db = client.db(dbName);
         // Get the documents collection
@@ -65,7 +65,7 @@ router.post('/:deal_id', function(req, res, next) {
             }
         });
     });
-    db.close();
+    Db.close();
 });
 
 module.exports = router;
