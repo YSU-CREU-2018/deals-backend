@@ -32,8 +32,8 @@ router.post('/', function(req, res, next) {
                     console.log(res);
                     res.send(response);
                 });
+            mongoclient.close();
         });
-        mongoclient.close();
     });
 });
 module.exports = router;
