@@ -25,14 +25,16 @@ router.post('/', function(req, res, next) {
         const collection = db.collection('user-stuff');
         // Find some documents
         collection.findOne( {"email": req.body["email"], "password": req.body["password"]}, function(err, results) {
-            if(err || !results)
+            if(err || !results){
                 return res.sendStatus(403);
-            else
+            }
+            else{
                 collection.find({'email' : req.body.email}).toArray(function(err, docs) {
                     response = docs;
                     console.log(res);
                     res.send(response);
                 });
+            }
         });
         db.close();
     });
