@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-// var Db = require('mongodb').Db;
+
+
 /* GET deals listing. */
 const MongoClient = require('mongodb').MongoClient;
 
@@ -13,6 +14,7 @@ const client = new MongoClient(url);
 
 /* GET profile listing. */
 router.get('/', function(req, res, next) {
+
     var response = '';
 
     // Use connect method to connect to the Server
@@ -25,7 +27,6 @@ router.get('/', function(req, res, next) {
       collection.aggregate([{ $sample: { size: 50} }]).toArray(function(err, docs) {
         response = docs;
         res.send(response);
-        // client.close();
       });
     });
 });
@@ -34,34 +35,33 @@ router.get('/', function(req, res, next) {
 //   res.send('respond with a resource');
 // });
 
-// router.post('/:deal_id', function(req, res, next) {
-//
-//     var response = '';
-//     // Use connect method to connect to the Server
-//     client.connect(function(err, Db) {
-//
-//         const db = client.db(dbName);
-//         // Get the documents collection
-//         const collection = db.collection('user-stuff');
-//
-//         const query = { "email" : req.body.email };
-//         const update = {
-//             "$addToSet": {
-//                 "ratedDeal": {
-//                     "deal": req.body["deal"],
-//                     "rating" : req.body.rating
-//                 }
-//             }
-//         };
-//         collection.updateOne(query, update).then(result => {
-//             if(err)
-//                 return res.sendStatus(403);
-//             else{
-//                 return res.sendStatus(200);
-//             }
-//         });
-//     });
-//     Db.close();
+router.post('/:deal_id', function(req, res, next) {
+
+    var response = '';
+    // Use connect method to connect to the Server
+    client.connect(function(err) {
+
+        const db = client.db(dbName);
+        // Get the documents collection
+        const collection = db.collection('user-stuff');
+
+        const query = { "email" : req.body.email };
+        const update = {
+            "$addToSet": {
+                "ratedDeal": {
+                    "deal": req.body["deal"],
+                    "rating" : req.body.rating
+                }
+            }
+        };
+        collection.updateOne(query, update).then(result => {
+            if(err)
+                return res.sendStatus(403);
+            else{
+                return res.sendStatus(200);
+            }
+        });
+    });
 });
 
 module.exports = router;

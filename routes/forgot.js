@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-// var Db = require('mongodb').Db;
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -28,15 +27,12 @@ router.post('/', function(req, res, next) {
             };
         // Find some documents
         collection.findOne( {"email": req.body["email"]}, function(err, results) {
-            if(err || !results){
+            if(err || !results)
                 return res.sendStatus(403);
-            }
-            else{
+            else
                 collection.updateOne(query, update);
                 return res.sendStatus(200);
-            }
         });
-        // db.close();
     });
 });
 

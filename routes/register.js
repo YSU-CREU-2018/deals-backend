@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-// var Db = require('mongodb').Db;
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -33,7 +32,6 @@ router.post('/', function(req, res, next) {
             return res.send('200');
         }
     });
-    // db.close();
 });
 
 module.exports = router;
