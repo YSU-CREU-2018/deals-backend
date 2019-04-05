@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var Db = require('mongodb').Db;
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -13,7 +14,7 @@ const client = new MongoClient(url);
 /* GET forgot listing. */
 router.post('/', function(req, res, next) {
     var response = '';
-    client.connect(function(err) {
+    client.connect(function(err, db) {
 
         const db = client.db(dbName);
         // Get the documents collection

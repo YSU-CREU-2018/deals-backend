@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+var Db = require('mongodb').Db;
 
 const MongoClient = require('mongodb').MongoClient;
 
@@ -16,7 +16,7 @@ router.post('/', function(req, res, next) {
     var response = '';
 
     // Use connect method to connect to the Server
-    client.connect(function(err) {
+    client.connect(function(err, db) {
 
         const db = client.db(dbName);
 
