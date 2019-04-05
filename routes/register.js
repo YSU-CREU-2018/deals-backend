@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
         else{
             return res.send('200');
         }
-        mongoclient.close();
+        db.close();
     });
 });
 

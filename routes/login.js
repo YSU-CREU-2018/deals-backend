@@ -32,7 +32,7 @@ router.post('/', function(req, res, next) {
                     console.log(res);
                     res.send(response);
                 });
-            mongoclient.close();
+            db.close();
         });
     });
 });

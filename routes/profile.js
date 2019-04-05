@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
                     response = docs;
                     res.send(response);
                 });
-            mongoclient.close();
+            db.close();
         });
     });
 });

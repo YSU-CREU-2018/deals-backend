@@ -27,7 +27,7 @@ router.get('/', function(req, res, next) {
       collection.aggregate([{ $sample: { size: 50} }]).toArray(function(err, docs) {
         response = docs;
         res.send(response);
-        mongoclient.close();
+        db.close();
       });
     });
 
@@ -62,7 +62,7 @@ router.post('/:deal_id', function(req, res, next) {
             else{
                 return res.sendStatus(200);
             }
-            mongoclient.close();
+            db.close();
         });
     });
 });
