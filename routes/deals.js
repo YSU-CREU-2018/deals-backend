@@ -20,14 +20,15 @@ router.get('/', function(req, res, next) {
     // Use connect method to connect to the Server
     client.connect(function(err) {
 
-      const db = client.db(dbName);
-      // Get the documents collection
-      const collection = db.collection('recommender-site');
-      // Find some documents
-      collection.aggregate([{ $sample: { size: 50} }]).toArray(function(err, docs) {
-        response = docs;
-        res.send(response);
-      });
+        const db = client.db(dbName);
+        // Get the documents collection
+        const collection = db.collection('recommender-site');
+        // Find some documents
+        collection.aggregate([{ $sample: { size: 50} }]).toArray(function(err, docs) {
+            response = docs;
+            res.send(response);
+        });
+      mongoclient.close();
     });
 });
 //will not need we cut this out but i am keeping it for safekeeping
@@ -60,6 +61,7 @@ router.post('/:deal_id', function(req, res, next) {
             else{
                 return res.sendStatus(200);
             }
+            mongoclient.close();
         });
     });
 });

@@ -33,6 +33,7 @@ router.post('/', function(req, res, next) {
                     res.send(response);
                 });
         });
+        mongoclient.close();
     });
 });
 module.exports = router;
