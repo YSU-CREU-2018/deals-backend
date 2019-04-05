@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
       collection.aggregate([{ $sample: { size: 50} }]).toArray(function(err, docs) {
         response = docs;
         res.send(response);
-        client.close();
+        // client.close();
       });
     });
 });
