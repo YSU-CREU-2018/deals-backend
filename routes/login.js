@@ -31,7 +31,7 @@ router.post('/', function(req, res, next) {
                     client.close();
                     return res.sendStatus(403);
                 }else{
-                    collection.find(
+                    db.collection('user-stuff').find(
                         {'email' : req.body.email},
                         function(err, response){
                             response.toArray(function(err, docs) {
