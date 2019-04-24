@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     var response = '';
 
     // Use connect method to connect to the Server
-    client.connect(function(err) {
+    client.open(function(err, client) {
 
       const db = client.db(dbName);
       // Get the documents collection
@@ -28,6 +28,7 @@ router.get('/', function(req, res, next) {
         response = docs;
         res.send(response);
       });
+      client.close();
     });
 });
 //will not need we cut this out but i am keeping it for safekeeping
