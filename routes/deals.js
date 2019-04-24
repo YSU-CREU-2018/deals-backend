@@ -41,14 +41,21 @@ router.get('/', function(req, res, next) {
 
 router.post('/:deal_id', function(req, res, next) {
 
+    /* GET deals listing. */
+    const MongoClient = require('mongodb').MongoClient;
+
+    // Connection URL
+    const url = process.env.MONGO_DB_URL;
+    // Database Name
+    const dbName = 'deals-data';
+    // Create a new MongoClient
+    const client = new MongoClient(url);
+
     var response = '';
     // Use connect method to connect to the Server
     client.connect(function(err) {
 
         const db = client.db(dbName);
-        // Get the documents collection
-        const collection = db.collection('user-stuff');
-
         const query = { "email" : req.body.email };
         const update = {
             "$addToSet": {
@@ -58,13 +65,20 @@ router.post('/:deal_id', function(req, res, next) {
                 }
             }
         };
-        collection.updateOne(query, update).then(result => {
-            if(err)
-                return res.sendStatus(403);
-            else{
-                return res.sendStatus(200);
+        // Get the documents collection
+        db.collection('user-stuff').updateOne(
+            query,
+            update,
+            function(err){
+                if(err){
+                    client.close();
+                    return res.sendStatus(403);
+                }else{
+                    client.close();
+                    return res.sendStatus(200);
+                }
             }
-        });
+        )
     });
 });
 
